@@ -19,7 +19,7 @@ class Course {
     };
   }
 
-  fillFile(courses) {
+  static fillFile(courses) {
     return new Promise((resolve, reject) => {
       fs.writeFile(
         path.join(__dirname, "..", "data", "courses.json"),
@@ -38,7 +38,14 @@ class Course {
   async save() {
     const data = await Course.getCourses();
     data.push(this.getCurrentCourse());
-    await this.fillFile(data);
+    await Course.fillFile(data);
+  }
+
+  static async update(body) {
+    const courses = await Course.getCourses();
+    const index = courses.findIndex(item => item.id === body.id);
+    courses[index] = body;
+    await Course.fillFile(courses);
   }
 
   static getCourses() {
@@ -54,6 +61,11 @@ class Course {
         }
       );
     });
+  }
+
+  static async getCourse(id) {
+    const courses = await Course.getCourses();
+    return courses.find(item => item.id === id);
   }
 }
 

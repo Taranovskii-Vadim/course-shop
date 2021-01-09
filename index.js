@@ -21,6 +21,7 @@ app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
+
 app.use("/", HomeRouter);
 app.use("/courses", CoursesRouter);
 app.use("/addCourse", AddCourseRouter);
