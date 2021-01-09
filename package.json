@@ -25,7 +25,8 @@
   },
   "homepage": "https://gitlab.com/PrgPaslen/courseshop#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
