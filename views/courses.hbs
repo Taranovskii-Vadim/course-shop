@@ -1,3 +1,4 @@
+<h1>Курсы</h1>
 {{#if courses.length}}
 {{#each courses}}
 <div class="row">
@@ -8,7 +9,9 @@
                 <span class="card-title black-text">{{title}}</span>
             </div>
             <div class="card-content">
-                <p><b>{{price}}</b></p>
+                <strong>
+                    <p class="price">{{price}}</p>
+                </strong>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo earum, consequuntur laboriosam
                     officiis blanditiis ducimus!</p>
             </div>
