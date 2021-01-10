@@ -15,8 +15,12 @@
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo earum, consequuntur laboriosam
                     officiis blanditiis ducimus!</p>
             </div>
-            <div class="card-action">
+            <div class="card-action cardFooter">
                 <a href="/courses/{{id}}/edit?allow=true">Редактировать курс</a>
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <button class="btn btn-primary">Купить</button>
+                </form>
             </div>
         </div>
     </div>

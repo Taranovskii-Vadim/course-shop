@@ -2,6 +2,12 @@
   padding: 0 2rem;
 }
 
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .price {
   font-size: 20px;
 }

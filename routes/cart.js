@@ -1,6 +1,7 @@
 const { Router } = require("express");
 
 const Cart = require("../models/cart");
+const Course = require("../models/course");
 
 const router = Router();
 
@@ -10,6 +11,12 @@ router.get("/", async (req, res) => {
     title: "Корзина",
     cart,
   });
+});
+
+router.post("/add", async (req, res) => {
+  const course = await Course.getCourse(req.body.id);
+  await Cart.addToCart(course);
+  res.redirect("/cart");
 });
 
 module.exports = router;
