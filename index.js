@@ -3,9 +3,10 @@ const hbsExpress = require("express-handlebars");
 const path = require("path");
 
 // Routes
-const HomeRouter = require("./routes/home");
-const CoursesRouter = require("./routes/courses");
-const AddCourseRouter = require("./routes/addCourse");
+const homeRouter = require("./routes/home");
+const coursesRouter = require("./routes/courses");
+const addCourseRouter = require("./routes/addCourse");
+const cartRouter = require("./routes/cart");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -22,9 +23,10 @@ app.set("views", "views");
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/", HomeRouter);
-app.use("/courses", CoursesRouter);
-app.use("/addCourse", AddCourseRouter);
+app.use("/", homeRouter);
+app.use("/courses", coursesRouter);
+app.use("/addCourse", addCourseRouter);
+app.use("/cart", cartRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
