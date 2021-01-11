@@ -1,0 +1,15 @@
+.navigation {
+  padding: 0 2rem;
+}
+* {
+  box-sizing: border-box;
+}
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: 20px;
+}

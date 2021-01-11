@@ -1,0 +1,31 @@
+<h1>Курсы</h1>
+{{#if courses.length}}
+{{#each courses}}
+<div class="row">
+    <div class="col s5">
+        <div class="card">
+            <div class="card-image">
+                <img style="object-fit: contain;" src="{{img}}">
+                <span class="card-title black-text">{{title}}</span>
+            </div>
+            <div class="card-content">
+                <strong>
+                    <p class="price">{{price}}</p>
+                </strong>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo earum, consequuntur laboriosam
+                    officiis blanditiis ducimus!</p>
+            </div>
+            <div class="card-action cardFooter">
+                <a href="/courses/{{id}}/edit?allow=true">Редактировать курс</a>
+                <form action="/cart/add" method="POST">
+                    <input type="hidden" name="id" value="{{id}}">
+                    <button class="btn btn-primary">Купить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{else}}
+<p>Курсов пока что нет :(</p>
+{{/if}}
