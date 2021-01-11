@@ -13,6 +13,11 @@ router.get("/", async (req, res) => {
   });
 });
 
+router.delete("/remove/:id", async (req, res) => {
+  const cart = await Cart.removeFromCart(req.params.id);
+  res.json(cart);
+});
+
 router.post("/add", async (req, res) => {
   const course = await Course.getCourse(req.body.id);
   await Cart.addToCart(course);

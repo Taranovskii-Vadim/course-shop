@@ -26,7 +26,7 @@ class Cart {
           if (err) {
             reject(err);
           } else {
-            resolve();
+            resolve(data);
           }
         }
       );
@@ -44,6 +44,19 @@ class Cart {
     }
     cart.totalPrice += +course.price;
     await Cart.fillFile(cart);
+  }
+
+  static async removeFromCart(id) {
+    const cart = await Cart.getCart();
+    const idx = cart.items.findIndex(item => item.id === id);
+    const candidate = cart.items[idx];
+    if (candidate.count === 1) {
+      cart.items = cart.items.filter(item => item.id !== id);
+    } else {
+      cart.items[idx].count--;
+    }
+    cart.totalPrice -= +candidate.price;
+    return await Cart.fillFile(cart);
   }
 }
 
