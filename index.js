@@ -1,5 +1,6 @@
 const express = require("express");
 const hbsExpress = require("express-handlebars");
+const mongoose = require("mongoose");
 const path = require("path");
 
 // Routes
@@ -28,6 +29,20 @@ app.use("/courses", coursesRouter);
 app.use("/addCourse", addCourseRouter);
 app.use("/cart", cartRouter);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port: ${PORT}`);
-});
+async function start() {
+  try {
+    const url =
+      "mongodb+srv://vadim:PQfBXnZM5UYOGSiZ@cluster0.ewsyq.mongodb.net/shop?retryWrites=true&w=majority";
+    await mongoose.connect(url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    app.listen(PORT, () => {
+      console.log(`Server is running on port: ${PORT}`);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+start();

@@ -4,12 +4,13 @@ const Course = require("../models/course");
 const router = Router();
 
 router.get("/", async (req, res) => {
-  const courses = await Course.getCourses();
-  res.render("courses", {
-    title: "Список курсов",
-    isCourses: true,
-    courses,
-  });
+  res.json({ test: "test" });
+  // const courses = await Course.getCourses();
+  // res.render("courses", {
+  //   title: "Список курсов",
+  //   isCourses: true,
+  //   courses,
+  // });
 });
 
 router.get("/:id/edit", async (req, res) => {
