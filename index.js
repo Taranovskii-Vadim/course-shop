@@ -1,7 +1,11 @@
 const express = require("express");
 const hbsExpress = require("express-handlebars");
+const handlebars = require("handlebars");
 const mongoose = require("mongoose");
 const path = require("path");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 
 // Routes
 const homeRouter = require("./routes/home");
@@ -15,6 +19,7 @@ const PORT = process.env.PORT || 3000;
 const hbs = hbsExpress.create({
   defaultLayout: "main",
   extname: "hbs",
+  handlebars: allowInsecurePrototypeAccess(handlebars),
 });
 
 app.engine("hbs", hbs.engine);
