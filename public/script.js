@@ -24,6 +24,8 @@ document.querySelectorAll(".date").forEach(item => {
   item.textContent = toDate(item.textContent);
 });
 
+const instance = M.Tabs.init(document.querySelectorAll(".tabs"));
+
 const cart = document.querySelector(".cart");
 
 cart.addEventListener("click", event => {
