@@ -12,6 +12,7 @@ const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
 const addCourseRouter = require("./routes/addCourse");
 const cartRouter = require("./routes/cart");
+const ordersRouter = require("./routes/orders");
 
 // Models
 const User = require("./models/user");
@@ -46,6 +47,7 @@ app.use("/", homeRouter);
 app.use("/courses", coursesRouter);
 app.use("/addCourse", addCourseRouter);
 app.use("/cart", cartRouter);
+app.use("/orders", ordersRouter);
 
 async function start() {
   try {
