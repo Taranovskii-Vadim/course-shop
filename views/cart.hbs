@@ -23,6 +23,9 @@
         </tbody>
     </table>
     <p><strong>Цена: </strong><span class="price">{{cart.totalPrice}}</span></p>
+    <form action="/orders" method="POST">
+        <button class="btn btn-primary" type="submit">Оформить заказ</button>
+    </form>
 </div>
 
 {{else}}

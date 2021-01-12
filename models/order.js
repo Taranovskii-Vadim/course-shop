@@ -6,11 +6,20 @@ const OrderSchema = new Schema({
     ref: "User",
     required: true,
   },
-  courseId: {
-    type: Schema.Types.ObjectId,
-    ref: "Course",
-    required: true,
-  },
+  courses: [
+    {
+      count: {
+        type: Number,
+        required: true,
+        default: 1,
+      },
+      courseId: {
+        type: Schema.Types.ObjectId,
+        ref: "Course",
+        required: true,
+      },
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,
