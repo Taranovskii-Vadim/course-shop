@@ -17,6 +17,7 @@ router.get("/", async (req, res) => {
       isOrders: true,
       orders: data.map(item => ({
         id: item._id,
+        date: item.date,
         price: item.courses.reduce(
           (acc, val) => (acc += val.count * val.courseId.price),
           0

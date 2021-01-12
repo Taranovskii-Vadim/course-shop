@@ -5,8 +5,23 @@ const toCurrency = price => {
   }).format(price);
 };
 
+const toDate = date => {
+  return new Intl.DateTimeFormat("ru-RU", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).format(new Date(date));
+};
+
 document.querySelectorAll(".price").forEach(item => {
   item.textContent = toCurrency(item.textContent);
+});
+
+document.querySelectorAll(".date").forEach(item => {
+  item.textContent = toDate(item.textContent);
 });
 
 const cart = document.querySelector(".cart");
