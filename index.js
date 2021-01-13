@@ -19,6 +19,7 @@ const authRouter = require("./routes/auth");
 
 // MiddleWares
 const signInMiddleware = require("./middlewares/signIn");
+const userMiddleware = require("./middlewares/user");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,6 +55,7 @@ app.use(
 );
 
 app.use(signInMiddleware);
+app.use(userMiddleware);
 
 app.use("/", homeRouter);
 app.use("/courses", coursesRouter);
