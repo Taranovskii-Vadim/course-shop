@@ -15,6 +15,7 @@
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo earum, consequuntur laboriosam
                     officiis blanditiis ducimus!</p>
             </div>
+            {{#if @root.isAuth}}
             <div class="card-action cardFooter">
                 <a href="/courses/{{id}}/edit?allow=true">Редактировать курс</a>
                 <form action="/cart/add" method="POST">
@@ -22,6 +23,7 @@
                     <button class="btn btn-primary">Купить</button>
                 </form>
             </div>
+            {{/if}}
         </div>
     </div>
 </div>

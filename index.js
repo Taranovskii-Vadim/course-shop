@@ -7,6 +7,7 @@ const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
 const session = require("express-session");
+const MongoStore = require("connect-mongodb-session")(session);
 
 // Routes
 const homeRouter = require("./routes/home");
@@ -22,10 +23,18 @@ const signInMiddleware = require("./middlewares/signIn");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const MONGODB_URI =
+  "mongodb+srv://vadim:PQfBXnZM5UYOGSiZ@cluster0.ewsyq.mongodb.net/shop?retryWrites=true&w=majority";
+
 const hbs = hbsExpress.create({
   defaultLayout: "main",
   extname: "hbs",
   handlebars: allowInsecurePrototypeAccess(handlebars),
+});
+
+const store = new MongoStore({
+  collection: "sessions",
+  uri: MONGODB_URI,
 });
 
 app.engine("hbs", hbs.engine);
@@ -40,6 +49,7 @@ app.use(
     secret: "secret val",
     resave: false,
     saveUninitialized: false,
+    store,
   })
 );
 
@@ -54,9 +64,7 @@ app.use("/auth", authRouter);
 
 async function start() {
   try {
-    const url =
-      "mongodb+srv://vadim:PQfBXnZM5UYOGSiZ@cluster0.ewsyq.mongodb.net/shop?retryWrites=true&w=majority";
-    await mongoose.connect(url, {
+    await mongoose.connect(MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
