@@ -3,6 +3,9 @@ const Course = require("../models/course");
 
 const router = Router();
 
+// MiddleWares
+const isProtectedRoute = require("../middlewares/isProtectedRoute");
+
 router.get("/", async (req, res) => {
   try {
     const courses = await Course.find();
@@ -16,7 +19,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isProtectedRoute, async (req, res) => {
   try {
     if (!req.query.allow) {
       res.redirect("/courses");
@@ -32,7 +35,7 @@ router.get("/:id/edit", async (req, res) => {
   }
 });
 
-router.post("/edit", async (req, res) => {
+router.post("/edit", isProtectedRoute, async (req, res) => {
   try {
     const { id } = req.body;
     delete req.body.id;
@@ -43,7 +46,7 @@ router.post("/edit", async (req, res) => {
   }
 });
 
-router.post("/remove", async (req, res) => {
+router.post("/remove", isProtectedRoute, async (req, res) => {
   try {
     await Course.deleteOne({ _id: req.body.id });
     res.redirect("/courses");

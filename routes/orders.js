@@ -4,9 +4,12 @@ const order = require("../models/order");
 // models
 const Order = require("../models/order");
 
+// MiddleWares
+const isProtectedRoute = require("../middlewares/isProtectedRoute");
+
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.get("/", isProtectedRoute, async (req, res) => {
   try {
     const data = await Order.find({ userId: req.user.id })
       .populate("userId")
@@ -37,7 +40,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", isProtectedRoute, async (req, res) => {
   try {
     const user = await req.user.populate("cart.courseId").execPopulate();
     const order = new Order({
