@@ -16,7 +16,8 @@
                 <td>{{title}}</td>
                 <td>{{count}}</td>
                 <td>
-                    <button class="waves-effect waves-light btn-small remove" data-id="{{id}}">Удалить</button>
+                    <button class="waves-effect waves-light btn-small remove" data-id="{{id}}"
+                        data-csrf="{{@root.csrf}}">Удалить</button>
                 </td>
             </tr>
             {{/each}}
@@ -24,6 +25,7 @@
     </table>
     <p><strong>Цена: </strong><span class="price">{{cart.totalPrice}}</span></p>
     <form action="/orders" method="POST">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
         <button class="btn btn-primary" type="submit">Оформить заказ</button>
     </form>
 </div>

@@ -8,6 +8,7 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
+const csrf = require("csurf");
 
 // Routes
 const homeRouter = require("./routes/home");
@@ -18,7 +19,7 @@ const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
 
 // MiddleWares
-const signInMiddleware = require("./middlewares/signIn");
+const variablesMiddleware = require("./middlewares/variables");
 const userMiddleware = require("./middlewares/user");
 
 const app = express();
@@ -53,8 +54,9 @@ app.use(
     store,
   })
 );
+app.use(csrf());
 
-app.use(signInMiddleware);
+app.use(variablesMiddleware);
 app.use(userMiddleware);
 
 app.use("/", homeRouter);

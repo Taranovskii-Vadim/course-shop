@@ -15,6 +15,7 @@
                 <input placeholder="Пароль" type="password" name="password" class="validate" required>
                 <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
             </div>
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
             <button class="btn waves-effect waves-light" type="submit">Войти</button>
         </form>
     </div>
@@ -36,6 +37,7 @@
                 <input placeholder="Пароль еще раз" type="password" name="confirm" class="validate" required>
                 <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
             </div>
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
             <button class="btn waves-effect waves-light" type="submit">Зарегистрироваться</button>
         </form>
     </div>

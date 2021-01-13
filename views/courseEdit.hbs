@@ -17,10 +17,12 @@
             <span class="helper-text" data-error="Укажите значение" data-success="right"></span>
         </div>
         <input type='hidden' name="id" value="{{course.id}}">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
         <button class="btn waves-effect waves-light" type="submit">Редактировать</button>
     </form>
     <form class="col s12" action="/courses/remove" method="POST">
         <input type="hidden" name="id" value="{{course.id}}">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
         <button type="submit" class="btn waves-effect waves-light red">Удалить</button>
     </form>
 </div>
