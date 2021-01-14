@@ -9,6 +9,8 @@ router.get("/login", async (req, res) => {
   res.render("./auth/login", {
     title: "Вход",
     isLogin: true,
+    registerErr: req.flash("registerErr"),
+    loginErr: req.flash("loginErr"),
   });
 });
 
@@ -29,9 +31,11 @@ router.post("/signIn", async (req, res) => {
           }
         });
       } else {
+        req.flash("loginErr", "Неверный пароль");
         res.redirect("/auth/login");
       }
     } else {
+      req.flash("loginErr", "Пользователь не существует");
       res.redirect("/auth/login");
     }
   } catch (e) {
@@ -44,7 +48,8 @@ router.post("/signUp", async (req, res) => {
     const { email, name, password, confirm } = req.body;
     const candidate = await User.findOne({ email });
     if (candidate) {
-      res.redirect("/auth/login");
+      req.flash("registerErr", "Пользователь уже существует");
+      res.redirect("/auth/login#signUp");
     } else {
       const hashPassword = await crypt.hash(password, 10);
       const user = new User({ email, name, password: hashPassword, cart: [] });

@@ -7,6 +7,9 @@
     </div>
     <div id="signIn" class="col s12 offset-s3">
         <form class="col s6" method="POST" action="/auth/signIn">
+            {{#if loginErr}}
+            <p class="alert">{{loginErr}}</p>
+            {{/if}}
             <div class="input-field">
                 <input placeholder="E-mail" type="email" name="email" class="validate" required>
                 <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
@@ -21,6 +24,9 @@
     </div>
     <div id="signUp" class="col s12 offset-s3">
         <form class="col s6" method="POST" action="/auth/signUp">
+            {{#if registerErr}}
+            <p class="alert">{{registerErr}}</p>
+            {{/if}}
             <div class="input-field">
                 <input placeholder="E-mail" type="email" name="email" class="validate" required>
                 <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
