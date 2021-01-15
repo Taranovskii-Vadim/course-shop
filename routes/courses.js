@@ -6,12 +6,15 @@ const router = Router();
 // MiddleWares
 const isProtectedRoute = require("../middlewares/isProtectedRoute");
 
+const { isOwner } = require("./helpers");
+
 router.get("/", async (req, res) => {
   try {
     const courses = await Course.find();
     res.render("courses", {
       title: "Список курсов",
       isCourses: true,
+      currentUserId: req.user ? req.user._id.toString() : null,
       courses,
     });
   } catch (e) {
@@ -20,16 +23,20 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id/edit", isProtectedRoute, async (req, res) => {
+  if (!req.query.allow) {
+    return res.redirect("/courses");
+  }
   try {
-    if (!req.query.allow) {
-      res.redirect("/courses");
-    } else {
-      const course = await Course.findById(req.params.id);
-      res.render("courseEdit", {
-        title: `Редактировать курс по ${course.title}`,
-        course,
-      });
+    const course = await Course.findById(req.params.id);
+
+    if (!isOwner(course, req)) {
+      return res.redirect("/courses");
     }
+
+    res.render("courseEdit", {
+      title: `Редактировать курс по ${course.title}`,
+      course,
+    });
   } catch (e) {
     console.log(e);
   }
@@ -39,7 +46,12 @@ router.post("/edit", isProtectedRoute, async (req, res) => {
   try {
     const { id } = req.body;
     delete req.body.id;
-    await Course.findByIdAndUpdate(id, req.body);
+    const course = await Course.findById(id);
+    if (!isOwner(course, req)) {
+      return res.redirect("/courses");
+    }
+    Object.assign(course, req.body);
+    await course.save();
     res.redirect("/courses");
   } catch (e) {
     console.log(e);
@@ -48,7 +60,7 @@ router.post("/edit", isProtectedRoute, async (req, res) => {
 
 router.post("/remove", isProtectedRoute, async (req, res) => {
   try {
-    await Course.deleteOne({ _id: req.body.id });
+    await Course.deleteOne({ _id: req.body.id, userId: req.user._id });
     res.redirect("/courses");
   } catch (e) {
     console.log(e);

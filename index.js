@@ -23,21 +23,21 @@ const authRouter = require("./routes/auth");
 const variablesMiddleware = require("./middlewares/variables");
 const userMiddleware = require("./middlewares/user");
 
+const keys = require("./keys");
+
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-const MONGODB_URI =
-  "mongodb+srv://vadim:PQfBXnZM5UYOGSiZ@cluster0.ewsyq.mongodb.net/shop?retryWrites=true&w=majority";
 
 const hbs = hbsExpress.create({
   defaultLayout: "main",
   extname: "hbs",
   handlebars: allowInsecurePrototypeAccess(handlebars),
+  helpers: require("./utils/hbsUtils"),
 });
 
 const store = new MongoStore({
   collection: "sessions",
-  uri: MONGODB_URI,
+  uri: keys.MONGODB_URI,
 });
 
 app.engine("hbs", hbs.engine);
@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
-    secret: "secret val",
+    secret: keys.SESSION_SECRET_KEY,
     resave: false,
     saveUninitialized: false,
     store,
@@ -70,7 +70,7 @@ app.use("/auth", authRouter);
 
 async function start() {
   try {
-    await mongoose.connect(MONGODB_URI, {
+    await mongoose.connect(keys.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
