@@ -17,6 +17,7 @@
             </div>
             {{#if @root.isAuth}}
             <div class="card-action cardFooter">
+                <a href="/courses/{{id}}">Посмотреть курс</a>
                 {{#ifeq @root.currentUserId userId }}
                 <a href="/courses/{{id}}/edit?allow=true">Редактировать курс</a>
                 {{/ifeq}}

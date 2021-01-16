@@ -67,4 +67,17 @@ router.post("/remove", isProtectedRoute, async (req, res) => {
   }
 });
 
+router.get("/:id", isProtectedRoute, async (req, res) => {
+  try {
+    const course = await Course.findById(req.params.id);
+    res.render("course", {
+      layout: "empty",
+      title: `Курс по ${course.title}`,
+      course,
+    });
+  } catch (e) {
+    console.log(e);
+  }
+});
+
 module.exports = router;
