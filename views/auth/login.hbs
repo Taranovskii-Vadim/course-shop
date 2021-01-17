@@ -6,7 +6,7 @@
         </ul>
     </div>
     <div id="signIn" class="col s12 offset-s3">
-        <form class="col s6" method="POST" action="/auth/signIn">
+        <form class="col s6" method="POST" action="/auth/signIn" novalidate>
             {{#if loginErr}}
             <p class="alert">{{loginErr}}</p>
             {{/if}}
@@ -23,7 +23,7 @@
         </form>
     </div>
     <div id="signUp" class="col s12 offset-s3">
-        <form class="col s6" method="POST" action="/auth/signUp">
+        <form class="col s6" method="POST" action="/auth/signUp" novalidate>
             {{#if registerErr}}
             <p class="alert">{{registerErr}}</p>
             {{/if}}
