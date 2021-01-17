@@ -1,9 +1,8 @@
 const { Router } = require("express");
 
+const { mapCartItems, calculateTotalPrice } = require("../utils/helpers");
 // Models
 const Course = require("../models/course");
-
-const { mapCartItems, calculateTotalPrice } = require("./helpers");
 
 // MiddleWares
 const isProtectedRoute = require("../middlewares/isProtectedRoute");

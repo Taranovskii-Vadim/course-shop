@@ -1,12 +1,14 @@
 const { Router } = require("express");
-const Course = require("../models/course");
 
-const router = Router();
+const { isOwner } = require("../utils/helpers");
+
+// Models
+const Course = require("../models/course");
 
 // MiddleWares
 const isProtectedRoute = require("../middlewares/isProtectedRoute");
 
-const { isOwner } = require("./helpers");
+const router = Router();
 
 router.get("/", async (req, res) => {
   try {

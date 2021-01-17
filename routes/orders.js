@@ -1,7 +1,6 @@
 const { Router } = require("express");
-const order = require("../models/order");
 
-// models
+// Models
 const Order = require("../models/order");
 
 // MiddleWares

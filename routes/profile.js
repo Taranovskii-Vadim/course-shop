@@ -1,7 +1,9 @@
 const { Router } = require("express");
 
+// Models
 const User = require("../models/user");
 
+// Middlewares
 const isProtectedRoute = require("../middlewares/isProtectedRoute");
 
 const router = Router();

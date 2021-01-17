@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 
 const { courseValidators } = require("../utils/validators");
 
+// Models
 const Course = require("../models/course");
 
 // MiddleWares
