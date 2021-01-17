@@ -1,9 +1,11 @@
 const { Router } = require("express");
-const crypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
+const crypt = require("bcryptjs");
 
-const User = require("../models/user");
 const { registerValidators, loginValidators } = require("../utils/validators");
+
+// Models
+const User = require("../models/user");
 
 const router = Router();
 

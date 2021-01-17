@@ -1,18 +1,20 @@
+const path = require("path");
 const express = require("express");
 const hbsExpress = require("express-handlebars");
 const handlebars = require("handlebars");
 const mongoose = require("mongoose");
-const path = require("path");
-const {
-  allowInsecurePrototypeAccess,
-} = require("@handlebars/allow-prototype-access");
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
 const csrf = require("csurf");
 const flash = require("connect-flash");
 const compression = require("compression");
+const {
+  allowInsecurePrototypeAccess,
+} = require("@handlebars/allow-prototype-access");
 
-// Routes
+const keys = require("./keys");
+
+// Routers
 const homeRouter = require("./routes/home");
 const coursesRouter = require("./routes/courses");
 const addCourseRouter = require("./routes/addCourse");
@@ -21,13 +23,11 @@ const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
 const profileRouter = require("./routes/profile");
 
-// MiddleWares
+// Middlewares
 const variablesMiddleware = require("./middlewares/variables");
 const userMiddleware = require("./middlewares/user");
 const errorMiddleware = require("./middlewares/error");
 const fileMiddleware = require("./middlewares/file");
-
-const keys = require("./keys");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -44,6 +44,7 @@ const store = new MongoStore({
   uri: keys.MONGODB_URI,
 });
 
+// Подключение handlebars
 app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 app.set("views", "views");
