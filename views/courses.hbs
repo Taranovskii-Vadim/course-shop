@@ -15,13 +15,19 @@
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo earum, consequuntur laboriosam
                     officiis blanditiis ducimus!</p>
             </div>
+            {{#if @root.isAuth}}
             <div class="card-action cardFooter">
+                <a href="/courses/{{id}}">Посмотреть курс</a>
+                {{#ifeq @root.currentUserId userId }}
                 <a href="/courses/{{id}}/edit?allow=true">Редактировать курс</a>
+                {{/ifeq}}
                 <form action="/cart/add" method="POST">
                     <input type="hidden" name="id" value="{{id}}">
+                    <input type="hidden" name="_csrf" value="{{@root.csrf}}">
                     <button class="btn btn-primary">Купить</button>
                 </form>
             </div>
+            {{/if}}
         </div>
     </div>
 </div>

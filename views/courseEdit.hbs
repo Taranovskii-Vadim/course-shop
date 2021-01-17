@@ -1,6 +1,6 @@
 <h1>Редактировать курс по {{course.title}}</h1>
 <div class="row">
-    <form class="col s12" method="POST" action="/courses/edit">
+    <form class="col s12 editForm" method="POST" action="/courses/edit">
         <div class="input-field">
             <input placeholder="Название курса" id="first_name" type="text" name="title" class="validate"
                 value={{course.title}} required>
@@ -17,6 +17,12 @@
             <span class="helper-text" data-error="Укажите значение" data-success="right"></span>
         </div>
         <input type='hidden' name="id" value="{{course.id}}">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
         <button class="btn waves-effect waves-light" type="submit">Редактировать</button>
+    </form>
+    <form class="col s12" action="/courses/remove" method="POST">
+        <input type="hidden" name="id" value="{{course.id}}">
+        <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+        <button type="submit" class="btn waves-effect waves-light red">Удалить</button>
     </form>
 </div>

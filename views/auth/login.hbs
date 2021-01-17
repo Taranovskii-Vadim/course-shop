@@ -1,0 +1,50 @@
+<div class="row">
+    <div class="col s12">
+        <ul class="tabs">
+            <li class="tab col s6"><a class="active" href="#signIn">Вход</a></li>
+            <li class="tab col s6"><a href="#signUp">Регистрация</a></li>
+        </ul>
+    </div>
+    <div id="signIn" class="col s12 offset-s3">
+        <form class="col s6" method="POST" action="/auth/signIn" novalidate>
+            {{#if loginErr}}
+            <p class="alert">{{loginErr}}</p>
+            {{/if}}
+            <div class="input-field">
+                <input placeholder="E-mail" type="email" name="email" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <div class="input-field">
+                <input placeholder="Пароль" type="password" name="password" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+            <button class="btn waves-effect waves-light" type="submit">Войти</button>
+        </form>
+    </div>
+    <div id="signUp" class="col s12 offset-s3">
+        <form class="col s6" method="POST" action="/auth/signUp" novalidate>
+            {{#if registerErr}}
+            <p class="alert">{{registerErr}}</p>
+            {{/if}}
+            <div class="input-field">
+                <input placeholder="E-mail" type="email" name="email" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <div class="input-field">
+                <input placeholder="Ваше имя" type="text" name="name" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <div class="input-field">
+                <input placeholder="Пароль" type="password" name="password" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <div class="input-field">
+                <input placeholder="Пароль еще раз" type="password" name="confirm" class="validate" required>
+                <span class="helper-text" data-error="Укажите значение" data-success="Верно"></span>
+            </div>
+            <input type="hidden" name="_csrf" value="{{@root.csrf}}">
+            <button class="btn waves-effect waves-light" type="submit">Зарегистрироваться</button>
+        </form>
+    </div>
+</div
