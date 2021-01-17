@@ -27,6 +27,11 @@
   padding: 0px 15px;
 }
 
+.avatar {
+  max-width: 500px;
+  height: auto;
+}
+
 .price {
   font-size: 20px;
 }

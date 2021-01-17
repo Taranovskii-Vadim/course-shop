@@ -18,11 +18,13 @@ const addCourseRouter = require("./routes/addCourse");
 const cartRouter = require("./routes/cart");
 const ordersRouter = require("./routes/orders");
 const authRouter = require("./routes/auth");
+const profileRouter = require("./routes/profile");
 
 // MiddleWares
 const variablesMiddleware = require("./middlewares/variables");
 const userMiddleware = require("./middlewares/user");
 const errorMiddleware = require("./middlewares/error");
+const fileMiddleware = require("./middlewares/file");
 
 const keys = require("./keys");
 
@@ -46,6 +48,7 @@ app.set("view engine", "hbs");
 app.set("views", "views");
 
 app.use(express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
@@ -56,6 +59,7 @@ app.use(
     store,
   })
 );
+app.use(fileMiddleware.single("avatar"));
 app.use(csrf());
 app.use(flash());
 
@@ -68,6 +72,7 @@ app.use("/addCourse", addCourseRouter);
 app.use("/cart", cartRouter);
 app.use("/orders", ordersRouter);
 app.use("/auth", authRouter);
+app.use("/profile", profileRouter);
 
 app.use(errorMiddleware);
 
