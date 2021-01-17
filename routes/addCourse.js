@@ -1,4 +1,8 @@
 const { Router } = require("express");
+const { validationResult } = require("express-validator");
+
+const { courseValidators } = require("../utils/validators");
+
 const Course = require("../models/course");
 
 // MiddleWares
@@ -13,8 +17,21 @@ router.get("/", isProtectedRoute, (req, res) => {
   });
 });
 
-router.post("/", isProtectedRoute, async (req, res) => {
+router.post("/", isProtectedRoute, courseValidators, async (req, res) => {
   try {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).render("addCourse", {
+        title: "Добавить курс",
+        isAdd: true,
+        error: errors.array()[0].msg,
+        data: {
+          title: req.body.title,
+          price: req.body.price,
+          img: req.body.img,
+        },
+      });
+    }
     const course = new Course({
       title: req.body.title,
       price: req.body.price,

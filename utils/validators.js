@@ -55,3 +55,9 @@ exports.loginValidators = [
     .isAlphanumeric()
     .trim(),
 ];
+
+exports.courseValidators = [
+  body("title", "Неверный формат названия").isLength({ min: 3 }).trim(),
+  body("price", "Неверный формат цены").isNumeric(),
+  body("img", "Неверный формат url").isURL(),
+];
